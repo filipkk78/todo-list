@@ -18,13 +18,31 @@
                         <ul class="projects"></ul>
                     </li>
                     <li><div class="list-item-wrapper"><img src="icons/notes.svg" alt="notes" class="sidebar-icon">Notes</div></li>
-                    <li><div class="list-item-wrapper"><img src="icons/add.svg" alt="add" class="sidebar-icon">New Task</div></li>
+                    <li><div class="list-item-wrapper" id="newtask"><img src="icons/add.svg" alt="add" class="sidebar-icon">New Task</div></li>
                 </ul>
             </div>
             <div class="main-block"></div>
         </div>
         <div class="popup">
-            
+            <div class="popup-form">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title">
+                <label for="duedate">Due date</label>
+                <input type="date" name="duedate" id="duedate">
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+                <label for="Project">Project</label>
+                <select name="project" id="project">
+                    
+                </select>
+                <label for="desc">Description</label>
+                <textarea name="desc" id="desc" rows="5" maxlength="200"></textarea>
+                <button id="addtaskbtn">Submit</button>
+            </div>
         </div>
     </main>
 </body>

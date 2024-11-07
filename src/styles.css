@@ -114,3 +114,49 @@ ul {
 .projects li {
   list-style-type: circle;
 }
+
+.popup {
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-form {
+  width: 500px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 30px;
+  padding: 25px;
+  position: relative;
+  display: grid;
+  border: 5px solid var(--accent-color);
+  gap: 5px;
+}
+
+.popup input, textarea, button, select {
+  border: 5px solid var(--accent-color);
+  border-radius: 8px;
+  background-color: transparent;
+  padding: 5px;
+}
+
+.popup-form button {
+  margin-top: 10px;
+}
+
+.popup textarea {
+  resize: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(90%) sepia(23%) saturate(179%) hue-rotate(115deg) brightness(103%) contrast(91%);filter: invert(90%) sepia(23%) saturate(179%) hue-rotate(115deg) brightness(103%) contrast(91%);
+}
+
+option {
+  color: black;
+}
+
