@@ -14,9 +14,7 @@
                     <li><div class="list-item-wrapper"><img src="icons/home.svg" alt="home" class="sidebar-icon">Home</div></li>
                     <li><div class="list-item-wrapper"><img src="icons/calendar-day.svg" alt="today" class="sidebar-icon">Today</div></li>
                     <li><div class="list-item-wrapper"><img src="icons/calendar-days.svg" alt="thisweek" class="sidebar-icon">This Week</div></li>
-                    <li><div class="list-item-wrapper"><img src="icons/projects.svg" alt="projects" class="sidebar-icon">Projects</div>
-                        <ul class="projects"></ul>
-                    </li>
+                    <li><div class="list-item-wrapper"><img src="icons/projects.svg" alt="projects" class="sidebar-icon">Projects</div></li>
                     <li><div class="list-item-wrapper"><img src="icons/notes.svg" alt="notes" class="sidebar-icon">Notes</div></li>
                     <li><div class="list-item-wrapper" id="newtask"><img src="icons/add.svg" alt="add" class="sidebar-icon">New Task</div></li>
                 </ul>
@@ -24,25 +22,23 @@
             <div class="main-block"></div>
         </div>
         <div class="popup">
-            <div class="popup-form">
+            <form class="popup-form">
                 <label for="title">Title</label>
-                <input type="text" id="title" name="title">
+                <input type="text" id="title" name="title" required>
                 <label for="duedate">Due date</label>
-                <input type="date" name="duedate" id="duedate">
+                <input type="date" name="dueDate" id="duedate" required>
                 <label for="priority">Priority</label>
                 <select name="priority" id="priority">
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
                     <option value="High">High</option>
                 </select>
-                <label for="Project">Project</label>
-                <select name="project" id="project">
-                    
-                </select>
-                <label for="desc">Description</label>
+                <label for="project">Project</label>
+                <select name="project" id="project"></select>
+                <label for="desc">Description (optional)</label>
                 <textarea name="desc" id="desc" rows="5" maxlength="200"></textarea>
-                <button id="addtaskbtn">Submit</button>
-            </div>
+                <button id="addtaskbtn" type="submit">Submit</button>
+            </form>
         </div>
     </main>
 </body>
