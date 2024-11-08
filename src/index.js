@@ -1,4 +1,5 @@
 import "./styles.css";
+import loadHomePage from "./modules/home";
 
 const myTasks = [];
 
@@ -26,8 +27,8 @@ class project {
 new project("Default");
 new project("Work");
 new project("Home");
-new task("get 1500 vbucks", "secure the funds for perfect cell when he arrives in the fortnite store", "09-11-2024", "Max", "2")
-console.log(myProjects);
+new task("put the mango down", "this is for my winter arc", "09-11-2024", "Medium", "2");
+new task("task 2", "yap yap yap yap yap", "11-12-2025", "High", "1");
 
 const projectList = document.querySelector("#project")
 for(let i = 0; i < myProjects.length; i++) {
@@ -37,10 +38,31 @@ for(let i = 0; i < myProjects.length; i++) {
     projectList.appendChild(project);
 }
 
+const popUp = document.querySelector(".popup"); 
+
 document.querySelector("#newtask").addEventListener("click", () => {
-    document.querySelector(".popup").style.display = "flex";
+    popUp.style.display = "flex";
 })
 
-document.querySelector("#addtaskbtn").addEventListener("click", () => {
-    document.querySelector(".popup").style.display = "none";
+const form = document.querySelector("form");
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    const obj = Object.fromEntries(fd);
+    console.log(obj);
+    new task(obj.title, obj.desc, obj.dueDate, obj.priority , obj.project);
+    popUp.style.display = "none";
+    loadHomePage();
 })
+
+
+document.querySelector(".header-title").addEventListener("click", () => {
+    console.log(myProjects);
+})
+
+document.querySelector("#cancelform").addEventListener("click", () => {
+    popUp.style.display = "none";
+})
+
+export default myProjects;
+loadHomePage();

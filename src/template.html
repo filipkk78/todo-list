@@ -19,12 +19,13 @@
                     <li><div class="list-item-wrapper" id="newtask"><img src="icons/add.svg" alt="add" class="sidebar-icon">New Task</div></li>
                 </ul>
             </div>
-            <div class="main-block"></div>
+            <div class="main-block"></div> 
         </div>
         <div class="popup">
+            
             <form class="popup-form">
                 <label for="title">Title</label>
-                <input type="text" id="title" name="title" required>
+                <input type="text" id="title" name="title" maxlength="40" required>
                 <label for="duedate">Due date</label>
                 <input type="date" name="dueDate" id="duedate" required>
                 <label for="priority">Priority</label>
@@ -38,6 +39,7 @@
                 <label for="desc">Description (optional)</label>
                 <textarea name="desc" id="desc" rows="5" maxlength="200"></textarea>
                 <button id="addtaskbtn" type="submit">Submit</button>
+                <button type="button" id="cancelform">Cancel</button>
             </form>
         </div>
     </main>
