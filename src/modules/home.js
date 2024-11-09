@@ -5,9 +5,18 @@ function loadHomePage() {
     while (mainBlock.firstChild) {
         mainBlock.removeChild(mainBlock.lastChild);
     }
+
+    function updateTaskCount() {
+        let taskCount = 0;
+        myProjects.forEach(project => {
+            taskCount+=project.tasks.length;
+        });
+        currentProject.textContent = `All (${taskCount})`;
+    }
+
     const currentProject = document.createElement("h2");
     currentProject.classList.add("current-project");
-    currentProject.textContent = "All";
+    updateTaskCount();
     mainBlock.appendChild(currentProject);
 
     const tasks = document.createElement("div");
@@ -28,6 +37,17 @@ function loadHomePage() {
     
                 const deleteButton = document.createElement("div");
                 deleteButton.classList.add("delete-button");
+                deleteButton.addEventListener("click", () => {
+                    tasks.removeChild(taskCard);
+                    project.tasks.splice(project.tasks.indexOf(task), 1);
+                    console.clear();
+                    myProjects.forEach(project => {
+                        project.tasks.forEach(task => {
+                            console.log(task);
+                        })
+                    })
+                    updateTaskCount();
+                })
 
                 taskCardHeader.appendChild(taskTitle);
                 taskCardHeader.appendChild(deleteButton);
@@ -55,7 +75,7 @@ function loadHomePage() {
                 taskCardFooter.appendChild(taskDueDate);   
             
                 taskCard.appendChild(taskCardFooter);
-                
+
                 tasks.appendChild(taskCard);
         });
     })

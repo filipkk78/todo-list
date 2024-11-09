@@ -24,7 +24,10 @@
         <div class="popup">
             
             <form class="popup-form">
-                <label for="title">Title</label>
+                <div class="form-header">
+                    <label for="title">Title</label>
+                    <div id="exitform">❌</div>
+                </div>
                 <input type="text" id="title" name="title" maxlength="40" required>
                 <label for="duedate">Due date</label>
                 <input type="date" name="dueDate" id="duedate" required>
@@ -38,8 +41,10 @@
                 <select name="project" id="project"></select>
                 <label for="desc">Description (optional)</label>
                 <textarea name="desc" id="desc" rows="5" maxlength="200"></textarea>
-                <button id="addtaskbtn" type="submit">Submit</button>
-                <button type="button" id="cancelform">Cancel</button>
+                <div class="form-buttons">
+                    <button id="addtaskbtn" type="submit">Submit</button>
+                    <button type="button" id="resetform">Reset</button>
+                </div>
             </form>
         </div>
     </main>
