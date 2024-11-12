@@ -90,6 +90,9 @@ main {
 
 .main-block {
   grid-area: 2 / 2 / 3 / 3;
+  overflow-y: scroll;
+  max-height: 70vh;
+  scrollbar-gutter: stable;
 }
 
 .list-item-wrapper {
@@ -117,7 +120,7 @@ ul {
   list-style-type: circle;
 }
 
-.popup {
+.popup, .project-popup {
   background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
   height: 100%;
@@ -139,7 +142,19 @@ ul {
   gap: 5px;
 }
 
-.popup input, textarea, button, select {
+.project-form {
+  width: 300px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 30px;
+  padding: 25px;
+  position: relative;
+  display: grid;
+  border: 5px solid var(--accent-color);
+  gap: 5px;
+}
+  
+
+input, textarea, button, select {
   border: 5px solid var(--accent-color);
   border-radius: 8px;
   background-color: transparent;
@@ -172,15 +187,15 @@ option {
 }
 
 
-.tasks::-webkit-scrollbar {
+.main-block::-webkit-scrollbar {
   width: 6px;
 }
 
-.tasks::-webkit-scrollbar-track {
+.main-block::-webkit-scrollbar-track {
   background: none;
 }
 
-.tasks::-webkit-scrollbar-thumb {
+.main-block::-webkit-scrollbar-thumb {
   background: #17b8d4;
   border-radius: 10px;
 }
@@ -191,9 +206,6 @@ option {
   grid-auto-rows: 165px;
   gap: 10px;
   padding: 10px;
-  overflow-y: scroll;
-  max-height: 65vh;
-  scrollbar-gutter: stable;
 }
 
 .current-project {
