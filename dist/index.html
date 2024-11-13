@@ -3,9 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>To do list</title>
 <script defer src="main.js"></script></head>
 <body>
-    <h1>Testa</h1>
+    <main>
+        <div class="container">
+            <div class="header"><h1 class="header-title">To Do List</h1></div>
+            <div class="sidebar">
+                <ul>
+                    <li><div class="list-item-wrapper" id="home"><img src="eae844053b33158171b0.svg" alt="home" class="sidebar-icon">Home</div></li>
+                    <li><div class="list-item-wrapper" id="today"><img src="5cf34b202cb7a433b873.svg" alt="today" class="sidebar-icon">Today</div></li>
+                    <li><div class="list-item-wrapper" id="thisweek"><img src="0b884d781612a4f35a04.svg" alt="thisweek" class="sidebar-icon">This Week</div></li>
+                    <li><div class="list-item-wrapper" id="notes"><img src="b7960941b22662a7702c.svg" alt="notes" class="sidebar-icon">Notes</div></li>
+                    <li><div class="list-item-wrapper" id="projects"><img src="bf1f240722863499a4d3.svg" alt="projects" class="sidebar-icon">Projects</div></li>
+                </ul>
+            </div>
+            <div class="main-block"></div>  
+        </div>
+        <div class="popup">
+            <form class="popup-form" id="taskform">
+                <div class="form-header">
+                    <label for="title">Title</label>
+                    <div id="exitform">❌</div>
+                </div>
+                <input type="text" id="title" name="title" maxlength="40" required>
+                <label for="duedate">Due date</label>
+                <input type="date" name="dueDate" id="duedate" required>
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+                <label for="project">Project</label>
+                <select name="project" id="project"></select>
+                <label for="desc">Description (optional)</label>
+                <textarea name="desc" id="desc" rows="5" maxlength="200"></textarea>
+                <div class="form-buttons">
+                    <button id="addtaskbtn" type="submit">Submit</button>
+                    <button type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+        <div class="project-popup">
+            <form id="project-form" class="project-form">
+                <div class="form-header">
+                    <label for="projectname">Project name</label>
+                    <div id="exitprojectform">❌</div>
+                </div>
+                <input type="text" name="projectname" id="projectname" required>
+                <div class="form-buttons">
+                    <button type="submit">Submit</button>
+                    <button type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+        <div class="notes-popup">
+            <form class="notes-form" id="notesform">
+                <div class="form-header">
+                    <label for="title">Title</label>
+                    <div id="exitnotesform">❌</div>
+                </div>
+                <input type="text" id="title" name="title" maxlength="40" required>
+                <label for="desc">Description</label>
+                <textarea name="desc" id="desc" rows="15" maxlength="500"></textarea>
+                <div class="form-buttons">
+                    <button type="submit">Submit</button>
+                    <button type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
