@@ -120,15 +120,17 @@ ul {
   list-style-type: circle;
 }
 
-.popup, .project-popup {
+.popup, .project-popup, .notes-popup {
   background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
-  display: none;
+  visibility: hidden;
+  display: flex;
   justify-content: center;
   align-items: center;
+  animation: form, 4s;
 }
 
 .popup-form {
@@ -170,7 +172,7 @@ input, textarea, button, select {
 }
 
 ::-webkit-calendar-picker-indicator {
-  filter: invert(90%) sepia(23%) saturate(179%) hue-rotate(115deg) brightness(103%) contrast(91%);filter: invert(90%) sepia(23%) saturate(179%) hue-rotate(115deg) brightness(103%) contrast(91%);
+  filter: invert(90%) sepia(23%) saturate(179%) hue-rotate(115deg) brightness(103%) contrast(91%);
 }
 
 option {
@@ -184,6 +186,16 @@ option {
   height: 100%;
   display: grid;
   grid-template-rows: 1fr 5fr 1fr;
+}
+
+.project-card {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  padding: 10px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -248,4 +260,55 @@ option {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.main-block-header {
+  padding: 10px 10px 0px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-button {
+  background-image: url(icons/add.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: invert(90%) sepia(23%) saturate(179%) hue-rotate(115deg) brightness(103%) contrast(91%);
+  height: 40px;
+  width: 40px;
+}
+
+.notes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 31vh;
+  gap: 10px;
+  padding: 10px;
+}
+
+.note {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  padding: 10px;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+  min-width: 0;
+  min-height: 0;
+  word-break: break-word;
+}
+
+.notes-popup {
+  visibility: hidden;
+}
+
+.notes-form {
+  width: 500px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 30px;
+  padding: 25px;
+  position: relative;
+  display: grid;
+  border: 5px solid var(--accent-color);
+  gap: 5px;
 }

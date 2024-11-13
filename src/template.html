@@ -15,8 +15,7 @@
                     <li><div class="list-item-wrapper" id="today"><img src="icons/calendar-day.svg" alt="today" class="sidebar-icon">Today</div></li>
                     <li><div class="list-item-wrapper" id="thisweek"><img src="icons/calendar-days.svg" alt="thisweek" class="sidebar-icon">This Week</div></li>
                     <li><div class="list-item-wrapper" id="notes"><img src="icons/notes.svg" alt="notes" class="sidebar-icon">Notes</div></li>
-                    <li><div class="list-item-wrapper" id="projects"><img src="icons/projects.svg" alt="projects" class="sidebar-icon">New Project</div></li>
-                    <li><div class="list-item-wrapper" id="newtask"><img src="icons/add.svg" alt="add" class="sidebar-icon">New Task</div></li>
+                    <li><div class="list-item-wrapper" id="projects"><img src="icons/projects.svg" alt="projects" class="sidebar-icon">Projects</div></li>
                 </ul>
             </div>
             <div class="main-block"></div>  
@@ -53,6 +52,21 @@
                     <div id="exitprojectform">❌</div>
                 </div>
                 <input type="text" name="projectname" id="projectname" required>
+                <div class="form-buttons">
+                    <button type="submit">Submit</button>
+                    <button type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+        <div class="notes-popup">
+            <form class="notes-form" id="notesform">
+                <div class="form-header">
+                    <label for="title">Title</label>
+                    <div id="exitnotesform">❌</div>
+                </div>
+                <input type="text" id="title" name="title" maxlength="40" required>
+                <label for="desc">Description</label>
+                <textarea name="desc" id="desc" rows="15" maxlength="500"></textarea>
                 <div class="form-buttons">
                     <button type="submit">Submit</button>
                     <button type="reset">Reset</button>

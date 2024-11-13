@@ -1,7 +1,12 @@
 import "./styles.css";
-import loadHomePage from "./modules/home";
+import { loadHomePage } from "./modules/home";
+import displayProjects from "./modules/projects";
+import displayNotes from "./modules/notes";
+import { logToday, today } from "./modules/today";
+import checkWeek from "./modules/thisweek"
+import { isThisISOWeek, isTomorrow, isYesterday } from "date-fns";
 
-const myTasks = [];
+const mainBlock = document.querySelector(".main-block");
 
 class task {
     constructor(title, description, dueDate, priority, projectId) {
@@ -13,7 +18,15 @@ class task {
     }
 }
 
+
+
 const myProjects = [];
+
+const myProjects_serialized = JSON.stringify(myProjects);
+localStorage.setItem("myProjects", myProjects_serialized);
+const myProjects_deserialized = JSON.parse(localStorage.getItem("myProjects"));
+
+console.log(myProjects_deserialized);
 
 class project {
     constructor(title) {
@@ -22,25 +35,33 @@ class project {
         this.tasks = [];
         myProjects.push(this);
     }
-    displayTasks() {
-        const mainBlock = document.querySelector(".main-block");
-        function updateTaskCount(title, taskCount) {
-            currentProject.textContent = `${title} (${taskCount})`;
-        }
-    
+    displayTasks(isToday, isThisWeek) {
+
         const currentProject = document.createElement("h2");
+
+        if(isToday == false) {
         currentProject.classList.add("current-project");
-        updateTaskCount(this.title, this.tasks.length);
+        currentProject.textContent = this.title;
         mainBlock.appendChild(currentProject);
+        }
     
         const tasks = document.createElement("div");
         tasks.classList.add("tasks");
         mainBlock.appendChild(tasks);
 
-        let projectName = this.title;
         let taskList = this.tasks;
 
         taskList.forEach(task => {
+            if(isToday) {
+                if(task.dueDate!=today) {
+                    return;
+                }
+            }
+            if(isThisWeek) {
+                if(isThisISOWeek(task.dueDate) == false) {
+                    return;
+                }
+            }
             const taskCard = document.createElement("div");
             taskCard.classList.add("task-card");
             
@@ -57,7 +78,6 @@ class project {
                 tasks.removeChild(taskCard);
                 taskList.splice(taskList.indexOf(task), 1);
                 console.clear();
-                updateTaskCount(projectName, taskList.length);
             })
 
             taskCardHeader.appendChild(taskTitle);
@@ -82,7 +102,16 @@ class project {
             taskCardFooter.appendChild(taskPriority);
 
             const taskDueDate = document.createElement("h4");
-            taskDueDate.textContent = `Due: ${task.dueDate}`;
+            if(task.dueDate==today) {
+                taskDueDate.textContent = `Due: Today`;
+            } else if(isTomorrow(task.dueDate)) {
+                taskDueDate.textContent = `Due: Tommorow`;
+            } else if(isYesterday(task.dueDate)) {
+                taskDueDate.textContent = `Due: Yesterday`;
+            } else {
+                taskDueDate.textContent = `Due: ${task.dueDate}`;
+            }
+            
             taskCardFooter.appendChild(taskDueDate);   
         
             taskCard.appendChild(taskCardFooter);
@@ -92,50 +121,50 @@ class project {
     }
 }
 
+const myNotes = [];
+
+class note {
+    constructor(title, desc) {
+        this.title = title;
+        this.desc = desc;
+        myNotes.push(this);
+    }
+}
+
 function clearPage() {
-    const main = document.querySelector(".main-block");
-    while(main.lastElementChild) {
-        main.removeChild(main.lastElementChild);
+    while(mainBlock.lastElementChild) {
+        mainBlock.removeChild(mainBlock.lastElementChild);
     }
 }
 
 new project("Default");
 new project("Work");
 new project("Home");
-new task("put the mango down", "this is for my winter arc", "09-11-2024", "Medium", "0");
+new task("put the mango down", "this is for my winter arc", "2024-11-09", "Medium", "0");
 new task("buy stillwater", "those who know", "11-12-2025", "High", "0");
-new task("put the fries in the bag", "just put the fries in the bag bro", "11-11-2024", "Low", "0");
-new task("Feed the dog", "Give the dog some food", "11-11-2024", "Medium", "2");
-new task("Feed the cat", "Give the cat some food", "11-11-2024", "High", "2");
-new task("Clean the house", "Vaccum and wipe the floors", "14-11-2024", "Low", "2");
-new task("Prepare lunch", "Make some food to eat at work", "12-11-2024", "High", "1");
-new task("Finish the app", "Complete the app you were working on recently", "26-11-2024", "High", "1");
-new task("Buy new clothes", "Get some new clothe for work", "15-11-2024", "Low", "1");
+new task("put the fries in the bag", "just put the fries in the bag bro", "2024-11-11", "Low", "0");
+new task("Feed the dog", "Give the dog some food", "2024-11-11", "Medium", "2");
+new task("Feed the cat", "Give the cat some food", "2024-11-11", "High", "2");
+new task("Clean the house", "Vaccum and wipe the floors", "2024-11-14", "Low", "2");
+new task("Prepare lunch", "Make some food to eat at work", "2024-11-12", "High", "1");
+new task("Finish the app", "Complete the app you were working on recently", "2024-11-26", "High", "1");
+new task("Buy new clothes", "Get some new clothe for work", "2024-11-13", "Low", "1");
 
-const projectList = document.querySelector("#project")
-for(let i = 0; i < myProjects.length; i++) {
+for(let i = 1; i <= 10; i++) {
+    new note(`Note ${i}`, "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste sapiente accusamus autem quam optio consequuntur dolores cumque labore, voluptate atque rerum animi aperiam incidunt perferendis ab esse omnis expedita libero!")
+}
+
+function updateProjectList() {
+    const projectList = document.querySelector("#project")
+    while(projectList.lastElementChild) {
+        projectList.removeChild(projectList.lastElementChild);
+    }
+    for(let i = 0; i < myProjects.length; i++) {
     const project = document.createElement("option");
     project.textContent = `${myProjects.at(i).title}`;
     project.setAttribute("value", i);
     projectList.appendChild(project);
-}
-
-const popUp = document.querySelector(".popup"); 
-
-document.querySelector("#newtask").addEventListener("click", () => {
-    popUp.style.display = "flex";
-})
-
-const form = document.querySelector("#taskform");
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const fd = new FormData(form);
-    const obj = Object.fromEntries(fd);
-    console.log(obj);
-    new task(obj.title, obj.desc, obj.dueDate, obj.priority , obj.project);
-    popUp.style.display = "none";
-    loadHomePage();
-})
+}}
 
 document.querySelector(".header-title").addEventListener("click", () => {
     console.clear();
@@ -146,35 +175,32 @@ document.querySelector(".header-title").addEventListener("click", () => {
     })
 })
 
-document.querySelector("#exitform").addEventListener("click", () => {
-    popUp.style.display = "none";
-    form.reset();
-})
+function updateMainBlockHeader(text, id, btntext, button) {
+    const mainBlockHeader = document.createElement("div");
+    mainBlockHeader.classList.add("main-block-header")
+    if (button == 0) {
+        mainBlockHeader.textContent = text;
+    } else {
+        const mainBlockHeaderTitle = document.createElement("h1");
+        mainBlockHeaderTitle.textContent = text;
+        mainBlockHeader.appendChild(mainBlockHeaderTitle);
+        const mainBtn = document.createElement("h1");
+        mainBtn.textContent = `New ${btntext}`;
+        const mainBtnWrapper = document.createElement("div");
+        mainBtnWrapper.classList.add("list-item-wrapper");
+        const mainBtnIcon = document.createElement("div");
+        mainBtnIcon.classList.add("add-button");
+        mainBtnWrapper.appendChild(mainBtnIcon);
+        mainBtnWrapper.appendChild(mainBtn);
+        mainBlockHeader.appendChild(mainBtnWrapper);
+        mainBtnWrapper.addEventListener("click", () => {
+            id.style.visibility = "visible";
+        })
+    }
+    mainBlock.appendChild(mainBlockHeader);
+}
 
-const projectPopUp = document.querySelector(".project-popup"); 
-
-document.querySelector("#projects").addEventListener("click", () => {
-    projectPopUp.style.display = "flex";
-})
-
-document.querySelector("#exitprojectform").addEventListener("click", () => {
-    projectPopUp.style.display = "none";
-    form.reset();
-})
-
-const pForm = document.querySelector("#project-form");
-pForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const fd = new FormData(pForm);
-    const obj = Object.fromEntries(fd);
-    console.log(obj);
-    new project(obj.projectname);
-    projectPopUp.style.display = "none";
-    pForm.reset();
-    loadHomePage();
-})
-
-export {myProjects, clearPage}
-// loadHomePage();
-
-document.querySelector("#home").addEventListener("click", loadHomePage);
+export {myProjects, mainBlock, clearPage, updateMainBlockHeader, project, updateProjectList, task, myNotes, note};
+loadHomePage();
+updateProjectList();
+logToday();
